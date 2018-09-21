@@ -9,7 +9,7 @@ variables = ['time','F1S F1SFIBV Overall', 'F1S F1SFOBV Overall', 'F1S F1SMIBV O
      'F1S F1NFIBV Overall', 'F1S F1NFOBV Overall', 'F1S F1NMIBV Overall', 'F1S F1NMOBV Overall', 'F1S North Fan Impeller Side Bearing Temp',
       'F1S North Fan Motor Side Bearing Temp', 'F1S South Fan Motor Side Bearing Temp', 'F1S South Fan Impeller Side Bearing Temp']
 
-data_path = '/home/johnny/Code/MachineLearning/Data/Fan/Furnance-1-1730-2300.txt'
+data_path = '/home/johnny/Code/arcelormittal-project/data/Furnance1-1_1_17-0056-0400.txt'
 # pd.concat(list_of_dataframes)
 import Fan
 import numpy as np
@@ -18,3 +18,7 @@ import pandas as pd
 df = Fan.Fan(variables, 1, 'sept 21')
 df.load(data_path)
 
+from som import SOM
+
+#som = SOM(6, 6, 4, 0.5, 0.5, 100)
+#som.train(data)

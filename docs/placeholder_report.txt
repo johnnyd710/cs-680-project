@@ -1,0 +1,1 @@
+show how a SOM works from that gif on wikipedia. showing the neurons going over the dist.
