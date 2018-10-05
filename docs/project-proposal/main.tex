@@ -20,6 +20,8 @@
 %----------------------------------------------------------------------------------------
 
 \documentclass{article}
+\usepackage{graphicx}
+\graphicspath{{./figs/}}
 
 \input{structure.tex} % Include the file specifying the document structure and custom commands
 
@@ -43,87 +45,38 @@
 %	INTRODUCTION
 %----------------------------------------------------------------------------------------
 
-\input{abstract}
+\input{sections/abstract}
 \newpage
 
-\section*{Introduction} % Unnumbered section
-
-The following is a proposal for a graduate research project for the University of Waterloo Computer Science class titled ``CS 680: Introduction to Machine Learning''.
-The goal is to use machine learning to give early warning to operators of an asset in case of failure.
-This will allow operators to repair or replace the asset with a scheduled maintenance task, as opposed to unexpected failure resulting in severe downtime costs.
-A proposed solution, using unsupervised machine learning, is to provide users with an indication of the health of a particular asset (known as \textit{condition monitoring}).
-The machine learning algorithm will be implemented and evaluated on an industrial furnace fan data set provided by a steel manufacturer.
-
-\subsection*{Problem Statement}
+\input{sections/intro}
+\section*{Problem Statement}
 \begin{center}
 	\textit{
-To provide users with an indication of asset failure, allowing for cost savings by early maintenance or replacement.
+To provide asset owners with a numerical value representing the asset's operating condition or risk of failure.
 	}
 \end{center}
 %----------------------------------------------------------------------------------------
 %	BACKGROUND
 %----------------------------------------------------------------------------------------
-
-\section{Background} % Numbered section
-
-%------------------------------------------------
-
-\subsection{Blast Furnances}
-
-
-%What is a blast furnace?
-Steel manufacturers typically have X blast furnaces in a mill.
-They are used to raise the internal temperature of steel.
-Setting the correct temperature is critical to product shape and quality.
-If at any point the blast furnaces fail, the entire line must be shut down to allow operators to find and repair the furnaces.
-Operators suggest this could take X amount of time.
-During this time, all steel production is stopped.
-That is why it is crucial for operators to have early warning so repairs can be made during scheduled shutdowns and not during live operation.
-
-% fans
-One way these furnaces fail is via a failure of the exhaust fans.
-
-
-% Predictive maintenance ...
-A predictive maintenance solution should 
-
-%------------------------------------------------
-
-\subsection{Previous Work}
-
-Using machine learning for condition monitoring is not new.
-
-% supervised learning approach and problems
-
-% one class SVM and problem (no score)
-
-% autoencoders 
-
-% self organized maps
-
-
-% Math equation/formula
-\begin{equation}
-	I = \int_{a}^{b} f(x) \; \text{d}x.
-\end{equation}
-
+\input{sections/background}
 
 %----------------------------------------------------------------------------------------
 %	PROBLEM 2
 %----------------------------------------------------------------------------------------
 
-\section{Implementation}
+\input{sections/prev-work}
 
-% unsupervised anomaly score
-
-% KPI
-
+\input{sections/implementation}
 
 %----------------------------------------------------------------------------------------
-\section{Evaluation}
+\input{sections/eval}
 
+\newpage
 
-\bibliography{bibliography}
+\bibliography{sections/bibliography}
 \bibliographystyle{plain}
+
+\newpage
+\input{sections/appendix}
 
 \end{document}
