@@ -25,18 +25,27 @@ Utilizing the Support Vector Machine (SVM), they learn a decision boundary to id
 This approach is interesting for high dimensional data but focuses on point anomalies, where as we are interested in projecting asset health over time.
 
 % self organized maps
-A self-organizing map is a type of neural network that is often used as a dimensionality reduction technique as it produces a low dimensional representation of the training samples \cite{map1990self}.
-Training a SOM on healthy asset data, researchers were able to output a health indication in an interpretable way but still lacked a quantifiable measure \cite{5524339}.
-Using a measure such as the minimum quantization error, Huang et al. were able to use it as the health indicator for ball bearings \cite{som-1}.
+A Self-Organizing Map (SOM) is a type of neural network that is often used as a dimensionality reduction technique as it produces a low dimensional representation of the training samples \cite{map1990self}.
+The two most relevant papers on using SOMs for condition maintenance were used on aircraft engines and ball bearings \cite{come2010aircraft} \cite{Tian2014AnomalyDU}.
+The SOM can be visualized directly as a tool to identify failures as in Figure \ref{aircraft}, where datapoints 517-607 are clearly anomalous.
+\begin{figure}[!h]
+    \includegraphics[scale=0.5]{aircraft}
+    \centering
+    \caption{SOM map being used to identify anomalous behaviour \cite{come2010aircraft}.}
+    \label{aircraft}
+\end{figure}
+%Training a SOM on healthy asset data, researchers were able to output a health indication in an interpretable way but still lacked a quantifiable measure \cite{5524339}.
+Alternatively, Huang et al. were able to use the minimum quantization error between a test point and the closest neuron of the SOM as the health indicator for ball bearings \cite{som-1}.
 % Math equation/formula
 \begin{equation}
 	Q = \min_{k} \Vert D-B_k \Vert
 \end{equation}
  Where $Q$ is the minimum quantization error, $D$ is a test set observation, and $B_k$ is the weight vector of the $k^{th}$ closest neuron of the SOM.
-Using quantization error can be improved as it is sensitive to noise.
-Researchers Tian et al. use a SOM and a $k$-nearest neighbours algorithm \ref{fig:knn} in combination with the Euclidean distance between the test data and the healthy data to develop a more robust health score.
+But, using quantization error can be improved as it is sensitive to noise.
+Researchers Tian et al. use a SOM and a $k$-nearest neighbours algorithm (see Figure \ref{knn}) in combination with the Euclidean distance between the test data and the healthy data to develop a more robust health score.
 \begin{figure}[!h]
     \includegraphics[width=8cm]{knn}
     \centering
-    \label{fig:knn}
+    \caption{A health score can be used as the distance from a test point to a cluster (or a neuron in a SOM) \cite{Tian2014AnomalyDU}.}
+    \label{knn}
 \end{figure}

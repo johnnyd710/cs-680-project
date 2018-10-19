@@ -1,0 +1,80 @@
+\documentclass{article}
+    \usepackage[nonatbib]{nips_2016}
+    
+    \usepackage[breaklinks=true,letterpaper=true,colorlinks,citecolor=black,bookmarks=false]{hyperref}
+    
+    \usepackage{amsthm}
+    \usepackage{amsmath,amssymb}
+    \usepackage{enumitem}
+    
+    \usepackage[sort&compress,numbers]{natbib}
+    \usepackage[normalem]{ulem}
+    
+    % use Times
+    \usepackage{times}
+    % For figures
+    \usepackage{graphicx} % more modern
+    %\usepackage{epsfig} % less modern
+    %\usepackage{subfig} 
+    
+    \graphicspath{{./figs/}}
+    
+    \usepackage{tikz}
+    \usepackage{tkz-tab}
+    \usepackage{caption} 
+    \usepackage{subcaption} 
+    \usetikzlibrary{shapes.geometric, arrows}
+    \tikzstyle{arrow} = [very thick,->,>=stealth]
+    
+    \usepackage{cleveref}
+    \usepackage{setspace}
+    \usepackage{hyperref}
+    \usepackage{wrapfig}
+    %\usepackage[ruled]{algorithm}
+    \usepackage{algpseudocode}
+    \usepackage[noend,linesnumbered]{algorithm2e}
+    
+    \usepackage[disable]{todonotes}
+    
+    
+    \title{Self-Organizing Map for Industry Condition Monitoring}
+    
+    \author{
+        Johnathan DiMatteo \\
+        School of Computer Science\\
+        University of Waterloo\\
+        Waterloo, ON, N2L 3G1 \\
+        \texttt{jdimatteo@uwaterloo.ca} \\
+        {\color{red} proposal due: October 23; report due: December 3.}
+    }
+    
+    \begin{document}
+    \maketitle
+    
+    \begin{abstract} 
+    \input{sections/abstract}
+    \end{abstract} 
+    
+    \section*{Problem Statement}
+    \begin{center} 
+        \textit{
+    To provide asset owners with a numerical value representing the asset's operating condition or risk of failure.
+        }
+    \end{center}
+    % you are going to present a brief background and motivation of your project. Why is it interesting/significant? How does it relate to the course?
+    \input{sections/intro}
+    \input{sections/background} 
+    \input{sections/prev-work}   
+    \input{sections/prop}
+
+    \newpage
+
+    \nocite{*}
+    
+    \bibliographystyle{unsrtnat}
+    \bibliography{sections/bibliography}
+
+    \newpage
+    \input{sections/appendix}
+    
+    \end{document}
