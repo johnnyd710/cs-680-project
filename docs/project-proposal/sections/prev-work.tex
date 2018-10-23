@@ -9,11 +9,11 @@ There are typically three approaches:
 \end{enumerate}
 
 % supervised
-Supervised methods require labeled data.
-Labeling is the process of associating an output with a set of variable values at a certain point in time.
-For example, if there is knowledge to when the failures occured and there are sufficient failures, the data can be labeled as healthy or not.
+Supervised methods require labelled data.
+Labelling is the process of associating an output with a set of variable values at a certain point in time.
+For example, if there is knowledge to when the failures occurred and there are sufficient failures, the data can be labelled as healthy or not.
 Unfortunately, there is just not enough failure data in practice to make this feasible.
-Instead, failure data can be estimated and artifically generated \cite{Sotiris2010AnomalyDT}.
+Instead, failure data can be estimated and artificially generated \cite{Sotiris2010AnomalyDT}.
 But even then the algorithms are limited to a binary outputs.
 
 Using $k$-nearest neighbours (kNN) to estimate asset condition directly is difficult due to noise, and requires domain specific knowledge to choose appropriate variables.
@@ -27,7 +27,7 @@ This approach is interesting for high dimensional data but focuses on point anom
 % self organized maps
 A Self-Organizing Map (SOM) is a type of neural network that is often used as a dimensionality reduction technique as it produces a low dimensional representation of the training samples \cite{map1990self}.
 The two most relevant papers on using SOMs for condition maintenance were used on aircraft engines and ball bearings \cite{come2010aircraft} \cite{Tian2014AnomalyDU}.
-The SOM can be visualized directly as a tool to identify failures as in Figure \ref{aircraft}, where datapoints 517-607 are clearly anomalous.
+The SOM can be visualized directly as a tool to identify failures as in Figure \ref{aircraft}, where data points 517-607 are clearly anomalous.
 \begin{figure}[!h]
     \includegraphics[scale=0.5]{aircraft}
     \centering
