@@ -1,0 +1,2 @@
+auto1.pf = they used a stacked denoising autoencoder but they first used fast fourier transform. I want raw data.
+som.pdf = they used a som on 2x5 extracted features: RMS, peak-to-peak, kurtosis, etc.
