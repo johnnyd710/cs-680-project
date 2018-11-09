@@ -13,7 +13,7 @@ def health_score(neurons, test_points):
     and then the euclidean distance metric
     '''
     print("Classifying...")
-    print(neurons)
+    #print(neurons)
     clf = NearestNeighbors(n_neighbors=3)
     clf.fit(neurons)
     distances, indices = clf.kneighbors(test_points)
