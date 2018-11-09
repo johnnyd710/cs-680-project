@@ -11,6 +11,15 @@ import numpy as np
 from scipy.stats import kurtosis, skew
 import time
 import pandas as pd
+import sys
+
+def fast_load(data_path, cols):
+    print("Loading data ...")
+    start = time.time()
+    df = pd.read_csv(data_path, usecols=cols, skiprows=[0,2], sep='\t')
+    end = time.time()
+    print("Time elasped:", end - start)
+    return df
 
 def load(data_path, flag, cols):
     # load data
@@ -50,8 +59,8 @@ def transform(dfs, chunk_size = 200):
     and a new numpy matrix where is column a feature
     made from the above functions.
     '''
+    chunk_size = round(len(dfs.index) / chunk_size)
     dfs = np.array_split(dfs, chunk_size)
-    print("size of chunk:", len(dfs[0].index))
     print("Getting pk-to-pk 0 (5), rms 1 (6), kurtosis 2 (7), skew 3 (8), std 4 (9) for each")
     num_of_functions = 5
     num_of_features = num_of_functions*len(list(dfs[0])) # num of functions * num of org. cols
@@ -59,20 +68,20 @@ def transform(dfs, chunk_size = 200):
     i = 0; j=0 
     for chunk in dfs:
         for col in chunk:
-            #ans[i,j] = pk_to_pk(chunk[col])
-            #j+=1
+            ans[i,j] = pk_to_pk(chunk[col])
+            j+=1
             ans[i,j] = rms(chunk[col])
             j+=1
-            #ans[i,j] = kurtosis(chunk[col])
-            #j+=1
-            #ans[i,j] = skew(chunk[col])
-            #j+=1
+            ans[i,j] = kurtosis(chunk[col])
+            j+=1
+            ans[i,j] = skew(chunk[col])
+            j+=1
             ans[i,j] = np.std(chunk[col])
             j+=1
         i+=1
         j=0
 
-    return ans, dfs[0].index[0]
+    return ans[~np.isnan(ans).any(axis=1)], dfs[0].index[0]
 
 #def scale(x):
 #    sc = MinMaxScaler(feature_range = (0, 1))
@@ -86,5 +95,5 @@ def shift_data(x, size = 500):
     for i in range(1, size):
         x[name + '-' + str(i)] = x[name].shift(i)
 
-    return x.iloc[size:]
-
+    x = x.iloc[size:]
+    return x[~np.isnan(x).any(axis=1)]

@@ -10,8 +10,10 @@ from plots import *
 from keras.layers import Input, Dense
 from keras.models import Model
 from sklearn.preprocessing import MinMaxScaler
+import csv
+import tensorflow as tf
 
-def build(X, encoding_dim, epochs = 100):
+def build(X, encoding_dim, filename, epochs = 100):
         # this is the size of our encoded representations
     size_of_input = X.shape[1]  
     print('size of input layer', size_of_input)
@@ -38,24 +40,32 @@ def build(X, encoding_dim, epochs = 100):
 
     autoencoder.compile(optimizer='adadelta', loss='binary_crossentropy')
 
-    autoencoder.fit(X, X,
-                    epochs=epochs,
-                    batch_size=100,
-                    shuffle=True,
-                    verbose=1)
+    my_training_batch_generator = get_dataset(filename)
+
+    autoencoder.fit_generator(generator=my_training_batch_generator,
+                                            epochs=epochs,
+                                            verbose=1,
+                                            use_multiprocessing=True,
+                                            workers=16,
+                                            max_queue_size=32,
+                                            shuffle=True)
 
     return encoder, decoder
 
+def read_csv(filename):
+    with open(filename, 'r') as f:
+        for line in f.readlines():
+            record = line.rstrip().split(',')
+            features = [float(n) for n in record]
+            yield features
 
-def main():
-    sc = MinMaxScaler(feature_range = (0, 1))
-    df = load("../data/Furnace 1 2-7-17 0056 to 1300.txt", False, 
-                    ['time', 'F1S F1SMIBV Overall']) #'F1S F1SMIBV Overall', 'F1S F1SMOBV Overall', 'F1S F1SFIBV Overall', 'F1S F1SFOBV Overall']) # inboard and outboard vibrations
-    df = shift_data(df)
-    print(df.head(5))
-    df = sc.fit_transform(df)
+def get_dataset(f):
+    generator = lambda: read_csv(f)
+    return tf.data.Dataset.from_generator(
+        generator, (tf.float32, tf.int32), ((n_features,), ()))
 
-  
+def main(path):
+     
     print("autoencoder for data")
 
     encoder, decoder = build(df, 20, 10)
@@ -99,4 +109,4 @@ def main():
 
 
 if __name__== "__main__":
-    main()
+    main(sys.argv[1])

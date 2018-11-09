@@ -10,40 +10,48 @@ import sompy
 import matplotlib.pyplot as plt
 from score import health_score
 from plots import *
+import tensorflow as tf
 from sklearn.preprocessing import MinMaxScaler
 
+def read_csv(filename):
+    with open(filename, 'r') as f:
+        for line in f.readlines():
+            record = line.rstrip().split(',')
+            features = [float(n) for n in record]
+            yield features
+
+def get_dataset(f):
+    generator = lambda: read_csv(f)
+    return tf.data.Dataset.from_generator(
+        generator, (tf.float32, tf.int32), ((n_features,), ()))
+
 def main():
+    # load training data
+    train = np.loadtxt('../data/training-data-som.csv')
+    #df_healthy = np.loadtxt("../data/testing-data-som.csv")
+    #df_failure = np.loadtxt("../data/failure-data-som.csv")
 
-    sc = MinMaxScaler(feature_range = (0, 1))
-    plot_all_dist()
-    exit()
-    df = load("../data/Furnace 1 2-7-17 0056 to 1300.txt", True, 
-                    ['time', 'F1S F1SMIBV Overall', 'F1S F1SMOBV Overall', 'F1S F1SFIBV Overall', 'F1S F1SFOBV Overall']) # inboard and outboard vibrations
-    df, start_time = transform(df)
-    df = sc.fit_transform(df)
-
-    df2 = load("../data/Furnace 1 1-1-17 0056 to 0400.txt", True, 
-                    ['time','F1S F1SMIBV Overall', 'F1S F1SMOBV Overall', 'F1S F1SFIBV Overall', 'F1S F1SFOBV Overall']) # inboard and outboard vibrations
-    #print(df_healthy[1:25])
-    #print(pd.Timedelta(df_healthy.index[0] - df_healthy.index[1]).seconds / 3600.0)
-    #print(list(df_healthy))
-    df2, start_time = transform(df2)
-    df2 = sc.transform(df2)
-
-    #print("som for data starting at ", start_time)
-    df_failure = load("../data/Furnace 1 1730 to 2300.txt", True, 
-        ['time','F1S F1SMIBV Overall', 'F1S F1SMOBV Overall','F1S F1SFIBV Overall', 'F1S F1SFOBV Overall']) # inboard and outboard vibrations
-    #print(list(df_failure))
-    df_failure, start_time = transform(df_failure)
-    df_failure = sc.transform(df_failure)
     print("som for data starting at ", start_time)
-    #som = SOM(5,5,10,0.5,0.5)
-    #som.train(df)
-    #print(som.map_input(df[0]))
 
-    #for i in range(0,df_failure.shape[1]):
-    #    dist(df_healthy, df_failure, i)
+    som = SOM(m = l,dim =  3, n_iterations=400)
+    som.train(train)
+    # Get output grid
+    image_grid = som.get_centroids()
+    print(image_grid)
+    image_grid =np.zeros(20*30*3).reshape((20,30,3))
+    plt.imshow(image_grid)
+    # Map colours to their closest neurons
+    mapped = som.map_vects(df)
+    print(mapped)
+    plt.title('Color SOM')
+    for i, m in enumerate(mapped):
+        plt.text(m[1], m[0], color_names[i], ha='center', va='center',
+                bbox=dict(facecolor='white', alpha=0.5, lw=0))
+    plt.show()
 
+    exit()
+
+    
     mapsize = [9,7]
     som = sompy.SOMFactory.build(df, mapsize, mask=None, mapshape='planar', 
         lattice='rect', normalization='var', initialization='pca', 
