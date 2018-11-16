@@ -212,3 +212,25 @@ class SOM(object):
             to_return.append(self._locations[min_index])
 
         return to_return
+
+
+    def health_score(self, input_vects, k, count, threshold):
+        """
+        Find the closest k neurons and calculates the average dist.
+        'input_vects' should be an iterable of 1-D NumPy arrays with
+        dimensionality as provided during initialization of this SOM.
+        Returns a list of 1-D NumPy arrays containing (row, column)
+        info for each input vector(in the same order), corresponding
+        to centroid of the closest neurons.
+        """
+
+        if not self._trained:
+            raise ValueError("SOM not trained yet")
+
+        to_return = []
+        for vect in input_vects:
+            MQE = [np.linalg.norm(vect - self._weightages[i]) if count[i] > threshold else 100000 for i in range(len(self._weightages))]
+            nearest = sorted(MQE)[:k]
+            to_return.append(sum(nearest)/k)
+
+        return to_return

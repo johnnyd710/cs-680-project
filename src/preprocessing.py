@@ -61,8 +61,8 @@ def transform(dfs, chunk_size = 200):
     '''
     chunk_size = round(len(dfs.index) / chunk_size)
     dfs = np.array_split(dfs, chunk_size)
-    print("Getting pk-to-pk 0 (5), rms 1 (6), kurtosis 2 (7), skew 3 (8), std 4 (9) for each")
-    num_of_functions = 5
+    print("Getting pk-to-pk 0 (5), rms 1 (6), kurtosis 2 (7), skew 3 (8), std 4 (9), corr 5 6 7 (8 9 10)")
+    num_of_functions = 8
     num_of_features = num_of_functions*len(list(dfs[0])) # num of functions * num of org. cols
     ans = np.zeros(shape=(len(dfs), num_of_features))
     i = 0; j=0 
@@ -78,6 +78,10 @@ def transform(dfs, chunk_size = 200):
             j+=1
             ans[i,j] = np.std(chunk[col])
             j+=1
+            for z in chunk:
+                if z != col:
+                    ans[i,j] = np.corrcoef(chunk[col], chunk[z])[0,1]
+                    j+=1
         i+=1
         j=0
 

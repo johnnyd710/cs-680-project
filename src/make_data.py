@@ -9,15 +9,15 @@ from sklearn.preprocessing import MinMaxScaler
 import csv
 
 def main(datapath, name, model, parameter):   
-    sc = MinMaxScaler(feature_range = (0, 1))
-    df = fast_load(datapath, vars) # = "../data/Furnace 1 2-7-17 0056 to 1300.txt" # 'F1S F1SMIBV Overall'
+    #sc = MinMaxScaler(feature_range = (0, 1))
+    df = fast_load(datapath, ['F1S F1SFIBV Overall', 'F1S F1SFOBV Overall', 'F1S F1SMOBV Overall', 'F1S F1SMIBV Overall']) # = "../data/Furnace 1 2-7-17 0056 to 1300.txt" # 'F1S F1SMIBV Overall'
     if model == 'autoencoder':
         df = shift_data(df, parameter)
     elif model == 'som':
         df, st = transform(df, parameter)
     else:
         print("please input either autoencoder or som")
-    df = sc.fit_transform(df)
+    #df = sc.fit_transform(df)
 
     print('saving to file...')
 

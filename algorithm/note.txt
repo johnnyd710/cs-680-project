@@ -1,2 +1,0 @@
-see som_anomaly_detection under ~/code for a good som package.
-I say we use that as a starting point. maybe merge the two.
