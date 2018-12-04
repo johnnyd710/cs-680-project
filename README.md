@@ -13,7 +13,7 @@ Furnance 1 1-16-17 - furnance 1 after repair
 
 in src/ folder:
 
-python3 make_data.py (name of data set) (interval for feature engineering)
+python3 make_data.py (name of data set) (interval for feature engineering)  
 python3 make_som.py (which data set to train)
 
 * note: data is protected for confidentially
