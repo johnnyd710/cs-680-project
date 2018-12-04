@@ -1,0 +1,73 @@
+\documentclass{article}
+\usepackage[nonatbib]{nips_2016}
+
+\usepackage[breaklinks=true,letterpaper=true,colorlinks,citecolor=black,bookmarks=false]{hyperref}
+
+\usepackage{amsthm}
+\usepackage{amsmath,amssymb}
+\usepackage{enumitem}
+
+\usepackage[sort&compress,numbers]{natbib}
+\usepackage[normalem]{ulem}
+\usepackage{subcaption}
+% use Times
+\usepackage{times}
+% For figures
+\usepackage{graphicx} % more modern
+%\usepackage{epsfig} % less modern
+%\usepackage{subfig} 
+
+\graphicspath{{../../figs/}}
+
+\usepackage{chronosys}
+
+\usepackage{tikz}
+\usepackage{tkz-tab}
+\usepackage{caption} 
+\usepackage{subcaption} 
+\usetikzlibrary{shapes.geometric, arrows}
+\tikzstyle{arrow} = [very thick,->,>=stealth]
+
+\usepackage{cleveref}
+\usepackage{setspace}
+\usepackage{wrapfig}
+%\usepackage[ruled]{algorithm}
+\usepackage{algpseudocode}
+\usepackage[noend,linesnumbered]{algorithm2e}
+
+\usepackage[disable]{todonotes}
+
+
+\title{Machine Learning for Condition Monitoring}
+
+\author{
+	Johnathan DiMatteo \\
+	School of Computer Science\\
+	University of Waterloo\\
+	Waterloo, ON, N2L 3G1 \\
+	\texttt{jdimatteo@uwaterloo.ca} \\
+}
+
+\begin{document}
+\maketitle
+
+\begin{abstract} 
+\input{sections/abstract}
+\end{abstract} 
+
+\input{sections/intro}
+\input{sections/background} 
+\input{sections/prev-work}   
+\input{sections/prop}
+\input{sections/evaluation}
+\input{sections/conclusion}
+
+
+\newpage
+
+\nocite{*}
+
+\bibliographystyle{unsrtnat}
+\bibliography{sections/bibliography}
+
+\end{document}

@@ -1,0 +1,23 @@
+\section{Conclusion}
+
+% advantages of SOM
+
+The raw vibration signal itself is too noisy and thresholds will result in too many alarms.
+To alleviate this, using features such as the moving average or the standard deviation of the signal can help.
+Still, these methods only analyze one signal at a time and lack robustness.
+A SOM factors multiple variables into one metric and eliminates the need for manual signal analysis or thresholds.
+It also beats traditional methods in terms of number of alarms and percentage of time above threshold.
+There was no opportunity to compare methods in terms of early prediction because all of the data sets provided to us were binary (a data set was either `healthy' or `unhealthy').
+Despite this, there is evidence suggesting SOMs can in fact give early prediction of bearing failures \cite{Tian2014AnomalyDU} \cite{som-1}.
+This should be the focus on future work, because the ultimate goal is to predict failure, not just detect it while it is happening.
+One way to achieve this would be to forecast the health score.
+Another way could be to try supervised methods such as logistic regression.
+Still, this application proved SOMs can be used on real data from industry for condition maintenance.
+Dealing with real industry data can be challenging due to noise and countless other factors.
+For example, operators at the steel mill may have lubricated the bearing resulting in temporary health improvement.
+
+Overall, the use of this application at a steel manufacturer would give operators a sense of how necessary maintenance is at a particular time,
+encouraging only performing maintenance when the bearing is unhealthy.
+This would avoid unintended consequences such as the Waddington Effect.
+Even better, this could give operators the opportunity to change the bearing during a planned shutdown, avoiding a costly unplanned shutdown later on. 
+This could save the plant millions of dollars in lost production.

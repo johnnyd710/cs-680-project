@@ -10,7 +10,11 @@ import csv
 
 def main(datapath, name, model, parameter):   
     #sc = MinMaxScaler(feature_range = (0, 1))
-    df = fast_load(datapath, ['F1S F1SFIBV Overall', 'F1S F1SFOBV Overall', 'F1S F1SMOBV Overall', 'F1S F1SMIBV Overall']) # = "../data/Furnace 1 2-7-17 0056 to 1300.txt" # 'F1S F1SMIBV Overall'
+    df = fast_load(datapath, ['F1S F1SFIBV Overall', 
+                                'F1S F1SFOBV Overall',
+                                'F1S F1SMOBV Overall', 
+                                'F1S F1SMIBV Overall']) 
+                                
     if model == 'autoencoder':
         df = shift_data(df, parameter)
     elif model == 'som':

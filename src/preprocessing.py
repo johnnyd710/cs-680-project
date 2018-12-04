@@ -44,6 +44,11 @@ def load(data_path, flag, cols):
     print("Time elasped:", end - start)
     return df
 
+def get_peaks(y):
+    from scipy.signal import find_peaks
+    peaks, _ = find_peaks(y)
+    return len(peaks)
+
 def pk_to_pk(y):
     max_pk = max(y)
     min_pk = min(y)
@@ -51,6 +56,18 @@ def pk_to_pk(y):
 
 def rms(y):
     return np.sqrt(np.mean(y**2))
+
+# Input a pandas series 
+def ent(data):
+    import scipy as sc
+    p_data= data.value_counts()/len(data) # calculates the probabilities
+    entropy=sc.stats.entropy(p_data)  # input probabilities to get the entropy 
+    return entropy
+
+def autocorr(x):
+    result = np.correlate(x, x, mode='full')
+    print(result)
+    return result[round(len(result)/2,0):][100]
 
 def transform(dfs, chunk_size = 200):
     '''
@@ -61,7 +78,7 @@ def transform(dfs, chunk_size = 200):
     '''
     chunk_size = round(len(dfs.index) / chunk_size)
     dfs = np.array_split(dfs, chunk_size)
-    print("Getting pk-to-pk 0 (5), rms 1 (6), kurtosis 2 (7), skew 3 (8), std 4 (9), corr 5 6 7 (8 9 10)")
+    print("Getting pk-pk 0 (5), rms 1 (6), kurtosis 2 (7), skew 3 (8), std 4 (9), corr 5 6 7 (8 9 10)")
     num_of_functions = 8
     num_of_features = num_of_functions*len(list(dfs[0])) # num of functions * num of org. cols
     ans = np.zeros(shape=(len(dfs), num_of_features))
