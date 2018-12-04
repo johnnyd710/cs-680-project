@@ -1,3 +1,9 @@
+'''
+From https://rubikscode.net/2018/08/27/implementing-self-organizing-maps-with-python-and-tensorflow/
+Made changes to map_vects()
+added get_centroids(), health_score() to implement the kNN robust MQE AND to elmin. bad neurons/bmus (see report).
+'''
+
 import pandas as pd
 import tensorflow as tf
 import tensorflow as tf
